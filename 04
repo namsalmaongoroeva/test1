@@ -1,0 +1,29 @@
+def sieve_of_eratosthenes(n):
+  primes = []
+  is_prime = [True] * (n + 1)
+  is_prime[0] = is_prime[1] = False #0 и 1 не являются простыми числами
+
+  for p in range(2, int(n**0.5) +1):
+    if is_prime[p]:
+      for multiple in range(p * p, n + 1, p):
+        is_prime[multiple] = False
+
+  for number in range(2, n + 1):
+    if is_prime[number]:
+      primes.append(number)
+
+  return primes
+
+while True:
+  user_input = input("Введите число N (больше или равно 2): ")
+
+  if user_input.isdigit():
+    N = int(user_input)
+    if N >=2:
+      primes = sieve_of_eratosthenes(N)
+      print("Простые числа от 2 до", N, ":")
+      for prime in primes:
+        print(prime)
+      break
+    else:
+      print("Ошибка: число должно быть больше или равно 2.")
